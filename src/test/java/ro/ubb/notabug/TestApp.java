@@ -1,3 +1,5 @@
+package ro.ubb.notabug;
+
 import org.junit.Test;
 
 public class TestApp {
