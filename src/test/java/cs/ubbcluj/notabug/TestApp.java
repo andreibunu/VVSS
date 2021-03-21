@@ -1,4 +1,4 @@
-package ro.ubb.notabug;
+package cs.ubbcluj.notabug;
 
 import org.junit.Test;
 
