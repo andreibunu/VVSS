@@ -6,6 +6,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class TestApp {
     private Service testService;
 
@@ -29,7 +31,15 @@ public class TestApp {
 
     @Test
     public void test2(){
-
+        Student student = new Student(TestBuilder.ID, TestBuilder.name, TestBuilder.group, TestBuilder.email);
+        testService.deleteStudent(student.getID());
+        testService.addStudent(student);
+        AtomicInteger numberOfStudents = new AtomicInteger();
+        testService.getAllStudenti().forEach(st-> numberOfStudents.addAndGet(1));
+        student.setNume("updatedTestName");
+        testService.updateStudent(student);
+        testService.getAllStudenti().forEach(st-> numberOfStudents.getAndDecrement());
+        assert (numberOfStudents.compareAndSet(0, 0));
     }
 
     @After
