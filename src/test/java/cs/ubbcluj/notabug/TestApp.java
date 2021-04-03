@@ -2,9 +2,11 @@ package cs.ubbcluj.notabug;
 
 import app.domain.Student;
 import app.service.Service;
+import app.validation.ValidationException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -40,6 +42,12 @@ public class TestApp {
         testService.updateStudent(student);
         testService.getAllStudenti().forEach(st-> numberOfStudents.getAndDecrement());
         assert (numberOfStudents.compareAndSet(0, 0));
+    }
+
+    @Test (expected = ValidationException.class)
+    public void test3(){
+        Student student = new Student(TestBuilder.ID, TestBuilder.name, TestBuilder.group, "");
+        testService.addStudent(student);
     }
 
     @After
