@@ -6,7 +6,6 @@ import app.validation.ValidationException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -21,9 +20,8 @@ public class TestApp {
 
     @Test
     public void test1(){
-        Student student = new Student(TestBuilder.ID, TestBuilder.name, TestBuilder.group, TestBuilder.email);
-        assert (testService.findStudent(student.getID()) != student);
-        testService.deleteStudent(TestBuilder.ID);
+        Student student = new Student(TestBuilder.VALID_ID, TestBuilder.VALID_NAME, 0, TestBuilder.VALID_EMAIL);
+        testService.deleteStudent(TestBuilder.VALID_ID);
         testService.addStudent(student);
         assert (testService.findStudent(student.getID()).getID().equals(student.getID()));
         assert (testService.findStudent(student.getID()).getNume().equals(student.getNume()));
@@ -33,26 +31,80 @@ public class TestApp {
 
     @Test
     public void test2(){
-        Student student = new Student(TestBuilder.ID, TestBuilder.name, TestBuilder.group, TestBuilder.email);
-        testService.deleteStudent(student.getID());
+        Student student = new Student(TestBuilder.VALID_ID, TestBuilder.VALID_NAME, 1, TestBuilder.VALID_EMAIL);
+        testService.deleteStudent(TestBuilder.VALID_ID);
         testService.addStudent(student);
-        AtomicInteger numberOfStudents = new AtomicInteger();
-        testService.getAllStudenti().forEach(st-> numberOfStudents.addAndGet(1));
-        student.setNume("updatedTestName");
-        testService.updateStudent(student);
-        testService.getAllStudenti().forEach(st-> numberOfStudents.getAndDecrement());
-        assert (numberOfStudents.compareAndSet(0, 0));
+        assert (testService.findStudent(student.getID()).getID().equals(student.getID()));
+        assert (testService.findStudent(student.getID()).getNume().equals(student.getNume()));
+        assert (testService.findStudent(student.getID()).getEmail().equals(student.getEmail()));
+        assert (testService.findStudent(student.getID()).getGrupa() == student.getGrupa());
     }
 
     @Test (expected = ValidationException.class)
     public void test3(){
-        Student student = new Student(TestBuilder.ID, TestBuilder.name, TestBuilder.group, "");
+        Student student = new Student(TestBuilder.VALID_ID, TestBuilder.VALID_NAME, -1, TestBuilder.VALID_EMAIL);
+        testService.deleteStudent(TestBuilder.VALID_ID);
+        testService.addStudent(student);
+    }
+
+
+    @Test
+    public void test4(){
+        Student student = new Student(TestBuilder.VALID_ID, TestBuilder.VALID_NAME, TestBuilder.VALID_GROUP, TestBuilder.VALID_EMAIL);
+        testService.addStudent(student);
+        assert (testService.findStudent(student.getID()).getNume().equals(student.getNume()));
+        String updatedName =  TestBuilder.VALID_NAME + "updated";
+        Student updatedStudent = new Student(TestBuilder.VALID_ID, updatedName, TestBuilder.VALID_GROUP, TestBuilder.VALID_EMAIL);
+        testService.addStudent(updatedStudent);
+        assert (testService.findStudent(student.getID()).getNume().equals(student.getNume()));
+    }
+
+
+    @Test (expected = ValidationException.class)
+    public void test5(){
+        Student student = new Student(null, TestBuilder.VALID_NAME, TestBuilder.VALID_GROUP, TestBuilder.VALID_EMAIL);
+        testService.deleteStudent(TestBuilder.VALID_ID);
+        testService.addStudent(student);
+    }
+
+    @Test (expected = ValidationException.class)
+    public void test6(){
+        Student student = new Student("", TestBuilder.VALID_NAME, TestBuilder.VALID_GROUP, TestBuilder.VALID_EMAIL);
+        testService.deleteStudent(TestBuilder.VALID_ID);
+        testService.addStudent(student);
+    }
+
+
+    @Test (expected = ValidationException.class)
+    public void test7(){
+        Student student = new Student(TestBuilder.VALID_ID, null, TestBuilder.VALID_GROUP, TestBuilder.VALID_EMAIL);
+        testService.deleteStudent(TestBuilder.VALID_ID);
+        testService.addStudent(student);
+    }
+
+    @Test (expected = ValidationException.class)
+    public void test8(){
+        Student student = new Student(TestBuilder.VALID_ID, "", TestBuilder.VALID_GROUP, TestBuilder.VALID_EMAIL);
+        testService.addStudent(student);
+    }
+
+    @Test (expected = ValidationException.class)
+    public void test9(){
+        Student student = new Student(TestBuilder.VALID_ID, TestBuilder.VALID_NAME, TestBuilder.VALID_GROUP, null);
+        testService.deleteStudent(TestBuilder.VALID_ID);
+        testService.addStudent(student);
+    }
+
+    @Test (expected = ValidationException.class)
+    public void test10(){
+        Student student = new Student(TestBuilder.VALID_ID, TestBuilder.VALID_NAME, TestBuilder.VALID_GROUP, "");
+        testService.deleteStudent(TestBuilder.VALID_ID);
         testService.addStudent(student);
     }
 
     @After
     public void after(){
-        testService.deleteStudent(TestBuilder.ID);
+        testService.deleteStudent(TestBuilder.VALID_ID);
     }
 
 

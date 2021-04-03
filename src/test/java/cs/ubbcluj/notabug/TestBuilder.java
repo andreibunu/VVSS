@@ -9,10 +9,10 @@ import app.validation.StudentValidator;
 import app.validation.TemaValidator;
 
 public class TestBuilder {
-    public static final String ID = "1";
-    public static final String name = "andrei";
-    public static final String email = "andrei@yahoo.com";
-    public static final int group = 932;
+    static final String VALID_ID = "brie1999";
+    static final String VALID_NAME = "Bunu Andrei";
+    static final String VALID_EMAIL = "andrei@gmail.com";
+    static final int VALID_GROUP = 932;
 
     public Service service;
 
@@ -31,21 +31,6 @@ public class TestBuilder {
     }
 
 
-    public static String getID() {
-        return ID;
-    }
-
-    public static String getName() {
-        return name;
-    }
-
-    public static String getEmail() {
-        return email;
-    }
-
-    public static int getGroup() {
-        return group;
-    }
 
     public Service getService() {
         return service;
