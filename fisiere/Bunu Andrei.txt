@@ -1,0 +1,42 @@
+
+Tema: 123
+Nota: 10.0
+Predata in saptamana: 14
+Deadline: 14
+Feedback: some feedback
+
+Tema: 123
+Nota: 10.0
+Predata in saptamana: 14
+Deadline: 14
+Feedback: some feedback
+
+Tema: 123
+Nota: 10.0
+Predata in saptamana: 14
+Deadline: 14
+Feedback: some feedback
+
+Tema: 123
+Nota: 10.0
+Predata in saptamana: 14
+Deadline: 14
+Feedback: some feedback
+
+Tema: 123
+Nota: 10.0
+Predata in saptamana: 14
+Deadline: 14
+Feedback: some feedback
+
+Tema: 123
+Nota: 10.0
+Predata in saptamana: 14
+Deadline: 14
+Feedback: some feedback
+
+Tema: 123
+Nota: 10.0
+Predata in saptamana: 14
+Deadline: 14
+Feedback: some feedback

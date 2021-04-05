@@ -8,11 +8,29 @@ import app.validation.NotaValidator;
 import app.validation.StudentValidator;
 import app.validation.TemaValidator;
 
+import java.time.LocalDate;
+
 public class TestBuilder {
+    //student
     static final String VALID_ID = "brie1999";
     static final String VALID_NAME = "Bunu Andrei";
     static final String VALID_EMAIL = "andrei@gmail.com";
     static final int VALID_GROUP = 932;
+
+    //tema
+    static final String VALID_TEMA_NR = "123";
+    static final String VALID_TEMA_DESCR = "Bunu Andrei";
+    static final int VALID_TEMA_DEADLINE = 14;
+    static final int VALID__TEMA_PRIMIRE = 14;
+
+    //nota
+    //String id, String idStudent, String idTema, double nota, LocalDate data
+    static final String VALID_nota_ID = "assign1";
+    static final String VALID_nota_ID_TEMA = "123";
+    static final String VALID_nota_ID_STUDENT = "brie1999";
+    static final double VALID_nota_NOTA = 10;
+    static final LocalDate VALID_nota_DATE = LocalDate.of(2019, 1, 1);
+
 
     public Service service;
 
